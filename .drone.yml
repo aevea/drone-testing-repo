@@ -1,0 +1,20 @@
+kind: pipeline
+name: default
+
+steps:
+  - name: fetch
+    image: docker:git
+    commands:
+      - git fetch --tags
+    when:
+      event: [tag]
+
+  - name: relase notes
+    image: commitsar/release-notary:0.3.0
+    environment:
+      GITHUB_TOKEN:
+        from_secret: github_token
+      GITHUB_REPOSITORY: $$DRONE_REPO
+    when:
+      event: tag
+    depends_on: [fetch]
