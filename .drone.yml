@@ -17,7 +17,7 @@ steps:
     environment:
       GITHUB_TOKEN:
         from_secret: github_token
-      GITHUB_REPOSITORY: $$CI_REPO
+      GITHUB_REPOSITORY: $CI_REPO
     commands:
       - echo $$GITHUB_REPOSITORY
       - release-notary publish
