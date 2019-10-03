@@ -5,6 +5,7 @@ steps:
   - name: fetch
     image: docker:git
     commands:
+      - git fetch origin master
       - git fetch --tags
     when:
       event: [tag]
