@@ -7,6 +7,8 @@ steps:
     commands:
       - git fetch origin master
       - git fetch --tags
+      - echo $$CI_REPO
+      - echo $$DRONE_REPO
     when:
       event: [tag]
 
@@ -15,7 +17,7 @@ steps:
     environment:
       GITHUB_TOKEN:
         from_secret: github_token
-      GITHUB_REPOSITORY: $$DRONE_REPO
+      GITHUB_REPOSITORY: $$CI_REPO
     when:
       event: tag
     depends_on: [fetch]
